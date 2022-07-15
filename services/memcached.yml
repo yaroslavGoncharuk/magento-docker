@@ -1,7 +1,0 @@
-version: '2'
-services:
-  memcached:
-    image: memcached
-    hostname: memcache
-    expose:
-     - "11211"

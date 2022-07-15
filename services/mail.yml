@@ -1,8 +1,0 @@
-version: '2'
-services:
-  mail:
-    image: mailhog/mailhog
-    hostname: mail
-    expose:
-      - "1025"
-      - "8025"

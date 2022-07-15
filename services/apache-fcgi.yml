@@ -1,8 +1,0 @@
-version: '3'
-services:
-  web:
-    image: httpd:alpine
-    expose:
-      - "80"
-    volumes:
-      - ${MAGENTO_PATH}/docker-magento/etc/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf

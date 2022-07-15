@@ -1,7 +1,0 @@
-version: '2'
-services:
-  mongodb:
-    image: mongo
-    hostname: mongodb
-    expose:
-      - "27017"

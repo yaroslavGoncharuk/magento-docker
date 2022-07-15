@@ -4,12 +4,6 @@ if [ ! -f .env ]; then
     exit
 fi
 
-if [ ! -f ./etc/php/auth.json ]; then
-    echo "Can't find ./etc/php/auth.json"
-    exit
-fi
-
-
 set -ex
 
 source ./.env
@@ -19,74 +13,6 @@ DOCKER_PROJECT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && 
 # for Mutagen installation: Update Magento path in mutagen.yml
 sed -ie "s|alpha: .*|alpha: \"$MAGENTO_PATH\"|" $DOCKER_PROJECT_DIR/mutagen.yml
 
-# Add domain to hosts
-#sudo -- sh -c "echo '127.0.0.1 $MAGENTO_DOMAIN' >> /etc/hosts"
-
-if [[ "" != "$GIT_CLONE_DEPTH" ]]; then
-  GIT_CLONE_DEPTH="--depth=${GIT_CLONE_DEPTH}"
-fi
-
-if [[ "yes" == "$RECLONE" ]]; then
-  if [ ! -d $MAGENTO_PATH ]; then
-      mkdir $MAGENTO_PATH
-  fi
-  cd $MAGENTO_PATH
-
-  repos=$INSTALLED_REPOS
-  if [[ ${MAGENTO_EDITION} == 'EE' ]]; then
-    repos=${INSTALLED_REPOS_EE}
-  fi
-  if [[ ${MAGENTO_EDITION} == 'B2B' ]]; then
-    repos=${INSTALLED_REPOS_B2B}
-  fi
-
-  for edition in $repos; do
-    cd $MAGENTO_PATH
-    org=$(echo "GIT_ORG_${edition}" | sed "s|-|_|g")
-    repo=$(echo "GIT_REPO_${edition}" | sed "s|-|_|g")
-    branch=$(echo "GIT_BRANCH_${edition}" | sed "s|-|_|g")
-    tag=$(echo "GIT_TAG_${edition}" | sed "s|-|_|g")
-    github_repo="git@github.com:${!org}/${!repo}.git"
-    clone_depth=$(echo "GIT_CLONE_DEPTH_${edition}" | sed "s|-|_|g")
-    path=$edition
-
-    if [[ -d ./${edition} ]] || [[ -d "./magento2ce/${edition}" ]]; then
-    #       repo exists, reset working tree and set correct branch
-      # continue
-      cd $MAGENTO_PATH/$edition
-      git clean -dfx -e '.idea' -e 'vendor' -e 'magento2*'
-      git reset --hard
-
-      git remote rm ${!org} || echo "."
-      git remote add ${!org} ${github_repo} || echo "."
-      if [ $? -eq 0 ]; then
-        git fetch ${!org}
-      fi
-
-      echo ${!tag}
-      echo ${tag}
-
-      if [[ "" != ${!tag}  ]]; then
-        git checkout tags/${!tag} -B ${!tag}
-        tag=""
-      else
-        git checkout -B ${!branch} ${!org}/${!branch}
-        git pull
-      fi
-
-      continue
-    fi
-
-    chmod g+s .
-
-    git clone ${!clone_depth} ${github_repo} ${path} -b ${!branch} --origin=${!org}
-  done
-else
- cd $MAGENTO_PATH/magento2ce
- export GIT_DISCOVERY_ACROSS_FILESYSTEM=1 && git checkout -- .
-fi
-
-# workaround to work with magento/magento2 && magento/partners-magento2ee repos
 cd $MAGENTO_PATH
 
 echo 'project initialized'

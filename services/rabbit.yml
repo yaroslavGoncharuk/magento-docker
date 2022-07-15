@@ -1,9 +1,0 @@
-version: '3.7'
-services:
-  rabbit:
-    image: rabbitmq:management
-    hostname: rabbitmq
-    expose:
-      - "15672"
-    x-setup:
-      - bin/magento setup:config:set --amqp-host=rabbit --amqp-user=guest --amqp-password=guest

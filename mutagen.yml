@@ -4,11 +4,11 @@ beforeCreate:
   - docker-compose up --build  --force-recreate --detach mutagen
 # Set up the main services (monolith, db, redis, elastic) after creating sessions. At this point, sessions will
 # have been established and code pushed to the shared volume.
-# Specific service will be up and run during reinstall phase
+# Specific service will be up and run during install phase
 afterCreate:
   - docker-compose pull
   - docker-compose up --build --detach
-  - bash reinstall-magento.sh
+  - bash install-magento.sh
 
 # Pause services after pausing sessions.
 afterPause:
@@ -26,10 +26,8 @@ beforeTerminate:
 commands:
   logs: docker-compose logs --follow
   reindex: docker-compose exec app magento reindex
-  reinstall: bash reinstall.sh
-  xdebug-enable: sed -ie "s|#zend_extension=xdebug.so|zend_extension=xdebug.so|" ./etc/php/xdebug.ini && docker-compose restart app web
-  xdebug-disable: sed -ie "s|zend_extension=xdebug.so|#zend_extension=xdebug.so|" ./etc/php/xdebug.ini && docker-compose restart app web
-  grpc-server-start-monolith: docker-compose exec app magento grpc
+  xdebug-enable: docker-compose exec app magento xdebug-enable && docker-compose restart app web
+  xdebug-disable: docker-compose exec app magento xdebug-disable && docker-compose restart app web
 
 # Synchronize code to the shared Docker volume via the Mutagen service.
 sync:
@@ -43,7 +41,7 @@ sync:
       defaultFileMode: 0666
       defaultDirectoryMode: 0777
   code:
-    alpha: "~/projects/livesearch/repos"
+    alpha: "~/www/repos"
     beta: "docker://web-mutagen/var/www"
     mode: "two-way-resolved"
     ignore:
