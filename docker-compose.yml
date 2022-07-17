@@ -38,14 +38,12 @@ services:
       - "${DB_PORT}:3306"
     cap_add:
       - SYS_NICE
-
-  # Magento 2 container with commerce-data-export repo
   app:
-    # image: rkostiv/php-fpm:8.1.0 # 7.4.0 | 8.1.0 are available at the moment
-    # to re-build image with gRPC use the following docker file:
-    build:
-      context: .
-      dockerfile: build/php/fpm
+    image: slopukhov/php:8.1.8-fpm-buster
+    # to re-build image use the following docker file:
+    # build:
+    #  context: .
+    #  dockerfile: build/php/fpm
     hostname: app
     ports:
       - "${SSH_PORT}:22"
@@ -83,18 +81,18 @@ services:
       memlock:
         soft: -1
         hard: -1
-  redis:
-    image: redis
-    hostname: redis
-    ports:
-      - "${REDIS_PORT}:6379"
-    sysctls:
-      net.core.somaxconn: 1024
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 20000
-        hard: 40000
+#  redis:
+#    image: redis
+#    hostname: redis
+#    ports:
+#      - "${REDIS_PORT}:6379"
+#    sysctls:
+#      net.core.somaxconn: 1024
+#    ulimits:
+#      nproc: 65535
+#      nofile:
+#        soft: 20000
+#        hard: 40000
 #  rabbit:
 #    image: rabbitmq:management
 #    hostname: rabbitmq

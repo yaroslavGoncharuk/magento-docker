@@ -2,7 +2,7 @@
 beforeCreate:
   - bash init_project
   - docker-compose up --build  --force-recreate --detach mutagen
-# Set up the main services (monolith, db, redis, elastic) after creating sessions. At this point, sessions will
+# Set up the main services (app, db, redis, elastic) after creating sessions. At this point, sessions will
 # have been established and code pushed to the shared volume.
 # Specific service will be up and run during install phase
 afterCreate:
