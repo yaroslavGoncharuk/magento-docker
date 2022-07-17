@@ -26,6 +26,9 @@ beforeTerminate:
 commands:
   logs: docker-compose logs --follow
   reindex: docker-compose exec app magento reindex
+  upgrade: docker-compose exec app magento upgrade
+  cron: docker-compose exec app magento cron
+  profile-generate: docker-compose exec app magento profile-generate
   xdebug-enable: docker-compose exec app magento xdebug-enable && docker-compose restart app web
   xdebug-disable: docker-compose exec app magento xdebug-disable && docker-compose restart app web
 
@@ -41,12 +44,10 @@ sync:
       defaultFileMode: 0666
       defaultDirectoryMode: 0777
   code:
-    alpha: "~/www/repos"
-    beta: "docker://web-mutagen/var/www"
+    alpha: "~/www/repos/magento2ce"
+    beta: "docker://web-mutagen/var/www/magento2ce"
     mode: "two-way-resolved"
     ignore:
       paths:
         - ".idea"
         - ".git"
-#        - "/magento2ce/vendor"
-#        - "/magento2ce/generated"

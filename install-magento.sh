@@ -11,4 +11,4 @@ cd $DOCKER_PROJECT_DIR
 
 docker-compose exec app magento install
 
-docker-compose exec app magento config_setup
+docker-compose exec app magento config-setup

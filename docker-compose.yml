@@ -59,6 +59,8 @@ services:
     volumes:
       - code:/var/www
       - ./.env:/tmp/.env
+      - ./etc/php/app/sendmail:/usr/local/bin/sendmail
+      - ./etc/php/tools/magento:/usr/local/bin/magento
       - ./etc/php/tools:/usr/local/bin/magento2:ro
       - ./etc/php/php.ini:/usr/local/etc/php/php.ini:ro
       - ./etc/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini

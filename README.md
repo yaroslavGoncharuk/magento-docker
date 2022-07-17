@@ -37,10 +37,6 @@
 
 * RUN `mutagen project start` to start project (repositories clone, linking, configuration)
 
-#### Emails sending
-
-Sent emails will be saved in folder `~/www/magento2ce/var/tmp/mails/` as .htm files
-
 #### Enable/disable Xdebug 
 
 * Enable: `mutagen project run xdebug-enable`
@@ -50,6 +46,9 @@ Sent emails will be saved in folder `~/www/magento2ce/var/tmp/mails/` as .htm fi
  
 :exclamation: port `9003` is used for debug. 
 
+#### Emails sending
+
+Sent emails will be saved in folder `~/www/magento2ce/var/tmp/mails/` as .htm files
 
 ### Project termination (removes all containers and volumes)
 

@@ -47,8 +47,6 @@ RUN apt-get update \
     && echo 'alias ll="ls -lA"' >>/root/.bashrc \
     && usermod -a -G root www-data \
     && chmod +x /usr/local/bin/* \
-    && ln -sf /usr/local/bin/magento2/magento /usr/local/bin/magento \
-    && ln -sf /usr/local/bin/magento2/sendmail /usr/local/bin/sendmail \
     && echo 'root:root' | chpasswd \
     && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
@@ -57,7 +55,7 @@ RUN apt update \
     && docker-php-ext-install intl \
     && pecl install -f xdebug
 
-WORKDIR /var/www/magento2ce
+WORKDIR /var/www
 
 EXPOSE 9000
 CMD ["php-fpm", "-R"]

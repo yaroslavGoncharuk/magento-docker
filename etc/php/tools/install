@@ -4,7 +4,7 @@ shopt -s extglob
 source /tmp/.env
 #cp /var/www/magento-docker/etc/php/tools/* /usr/local/sbin
 
-sleep 60
+sleep 30
 
 #clean project dir
 rm -rf generated/* var/* app/etc/env.php app/etc/config.php
