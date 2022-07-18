@@ -27,6 +27,7 @@ commands:
   logs: docker-compose logs --follow
   reindex: docker-compose exec app magento reindex
   upgrade: docker-compose exec app magento upgrade
+  cache-flush: docker-compose exec app magento cache-flush
   cron: docker-compose exec app magento cron
   profile-generate: docker-compose exec app magento profile-generate
   xdebug-enable: docker-compose exec app magento xdebug-enable && docker-compose restart app web

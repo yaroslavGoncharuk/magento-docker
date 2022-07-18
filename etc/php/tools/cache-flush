@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-bin/magento setup:upgrade
-
 bin/magento cache:flush

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-bin/magento cache:flush
-
 php -d memory_limit=-1 -f bin/magento setup:performance:generate-fixtures -s setup/performance-toolkit/profiles/${MAGENTO_EDITION}/${MAGENTO_PROFILE}.xml
+
+bin/magento cache:flush
 
 sleep 30
 
