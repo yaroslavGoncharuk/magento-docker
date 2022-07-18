@@ -26,6 +26,10 @@ services:
       - app
   db:
     image: mariadb:10.4.12
+    deploy:
+      resources:
+        reservations:
+          memory: 4096M
     hostname: db
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
@@ -36,11 +40,11 @@ services:
       - "${DB_PORT}:3306"
     command: --default-authentication-plugin=mysql_native_password
   app:
-    # image: slopukhov/php:8.1.8-fpm-buster
+    image: slopukhov/php:8.1.8-fpm-buster
     # to re-build image use the following docker file:
-    build:
-      context: .
-      dockerfile: build/php/fpm
+    # build:
+    #   context: .
+    #   dockerfile: build/php/fpm
     hostname: app
     ports:
       - "${SSH_PORT}:22"
