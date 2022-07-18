@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
-php -d memory_limit=-1 -f bin/magento setup:performance:generate-fixtures setup/performance-toolkit/profiles/${MAGENTO_EDITION}/${MAGENTO_PROFILE}.xml
+bin/magento cache:flush
 
-bin/magento cache:clean
+php -d memory_limit=-1 -f bin/magento setup:performance:generate-fixtures -s setup/performance-toolkit/profiles/${MAGENTO_EDITION}/${MAGENTO_PROFILE}.xml
+
+sleep 30
+
+php -d memory_limit=-1 -f bin/magento indexer:reindex
+
+bin/magento cache:flush
