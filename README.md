@@ -22,7 +22,7 @@
     Proposed structure:
 ```
     ~/www/magento-docker                    # This repo
-    ~/www/repos/magento2ce                  # Magento 2 repo
+    ~/www/repos/magento2ce                  # Magento 2 repo (If you want to install a version other than CE, then simply deploy files of the required version and or extensions to this directory over the files from CE)
 ```
 
 2. Add `magento.test` to hosts:
