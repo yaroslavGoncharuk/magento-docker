@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("DROP DATABASE IF EXISTS magento_integration_tests;");'
+php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("CREATE DATABASE magento_integration_tests;");'

@@ -16,7 +16,6 @@ cd /var/www/magento2ce
 #install magento
 composer install
 bin/magento setup:install \
-   --cleanup-database \
    --backend-frontname=admin \
    --admin-lastname=Admin \
    --admin-firstname=Admin \
@@ -24,10 +23,9 @@ bin/magento setup:install \
    --base-url=https://magento.test/ \
    --admin-user=${ADMIN_USER} \
    --admin-password=${ADMIN_PASSWORD} \
-   --db-name=magento \
-   --db-host=db \
-   --elasticsearch-host=elastic \
-   --db-prefix=
+   --cleanup-database \
+   --db-host=db --db-name=magento --db-prefix= \
+   --elasticsearch-host=elastic --elasticsearch-port=${ELASTIC_PORT} \
 
 echo "Compiling Magento with changes..."
 bin/magento setup:upgrade

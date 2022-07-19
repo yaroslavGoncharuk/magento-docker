@@ -6,6 +6,7 @@ services:
     container_name: web-mutagen
     volumes:
       - code:/var/www
+  # https://devdocs.magento.com/guides/v2.4/install-gde/system-requirements.html
   web:
     image: nginx:1.21.4-alpine
     hostname: web
@@ -82,23 +83,16 @@ services:
       memlock:
         soft: -1
         hard: -1
-#  redis:
-#    image: redis
-#    hostname: redis
-#    ports:
-#      - "${REDIS_PORT}:6379"
-#    sysctls:
-#      net.core.somaxconn: 1024
-#    ulimits:
-#      nproc: 65535
-#      nofile:
-#        soft: 20000
-#        hard: 40000
-#  rabbit:
-#    image: rabbitmq:management
-#    hostname: rabbitmq
-#    ports:
-#      - "${RABBIT_PORT}:15672"
+  redis:
+    image: redis:6.2.7
+    hostname: redis
+    ports:
+      - "${REDIS_PORT}:6379"
+  rabbit:
+    image: rabbitmq:3.9.21
+    hostname: rabbitmq
+    ports:
+      - "${RABBIT_PORT}:5672"
 networks:
   default:
     driver: bridge

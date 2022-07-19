@@ -4,3 +4,13 @@ bin/magento config:set web/seo/use_rewrites 1
 bin/magento config:set dev/template/allow_symlink 1
 bin/magento config:set admin/security/admin_account_sharing 1
 bin/magento config:set admin/security/session_lifetime 31536000
+
+bin/magento setup:config:set -n --session-save=redis --session-save-redis-host=redis --session-save-redis-port=${REDIS_PORT} --cache-backend-redis-db=0
+
+bin/magento setup:config:set -n --amqp-host=rabbitmq --amqp-port=${RABBIT_PORT} --amqp-user=guest --amqp-password=guest
+
+bin/magento cache:flush
+
+php -d memory_limit=-1 -f bin/magento indexer:reindex
+
+bin/magento cache:flush
