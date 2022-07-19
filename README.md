@@ -25,17 +25,43 @@
     ~/www/repos/magento2ce                  # Magento 2 repo
 ```
 
-2. Copy `.env.dist` in `.env` and update the variables you need.
-
-3. Add `magento.test` to hosts:
+2. Add `magento.test` to hosts:
 
 ```
     sudo -- sh -c "echo '127.0.0.1 magento.test' >> /etc/hosts"
 ```
 
+3. Copy `.env.dist` in `.env` and update the variables you need. 
+
+4. Optionally update in `.env` the values for `PROFILE_EDITION` and `PROFILE_SIZE` which will be used when running the performance profile generation command
+
 ### Project start
 
 * RUN `mutagen project start` to start project (repositories clone, linking, configuration)
+
+#### Generate performance profile
+
+* RUN `mutagen project run profile-generate` to generate performance profile
+
+#### Cron run
+
+* RUN `mutagen project run cron` to execute cron command
+
+#### Reindex run
+
+* RUN `mutagen project run reindex` to execute reindex command
+
+#### Cache flush
+
+* RUN `mutagen project run cache-flush` to execute cache flush command
+
+#### Upgrade run
+
+* RUN `mutagen project run upgrade` to execute upgrade command
+
+#### DI compile
+
+* RUN `mutagen project run di-compile` to execute di compile command
 
 #### Enable/disable Xdebug 
 
