@@ -8,14 +8,13 @@ services:
       - code:/var/www
   # https://devdocs.magento.com/guides/v2.4/install-gde/system-requirements.html
   web:
-    image: nginx:1.21.4-alpine
+    image: nginx:1.21.6
     hostname: web
     volumes:
       - code:/var/www
       - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./etc/nginx/server.crt:/etc/nginx/server.crt
       - ./etc/nginx/server.key:/etc/nginx/server.key
-      - ./etc/nginx/fetch_env.js:/etc/nginx/fetch_env.js
     networks:
       default:
         aliases:
@@ -47,13 +46,11 @@ services:
     #   context: .
     #   dockerfile: build/php/fpm
     hostname: app
-    ports:
-      - "${SSH_PORT}:22"
-      - "9001:9001"
     depends_on:
-      - elastic
       - db
-    stop_signal: SIGKILL
+      - elastic
+      - redis
+      - rabbit
     env_file:
       - ./.env
     volumes:
@@ -61,8 +58,8 @@ services:
       - ./.env:/tmp/.env
       - ./etc/php/app/sendmail:/usr/local/bin/sendmail
       - ./etc/php/tools/magento:/usr/local/bin/magento
-      - ./etc/php/tools:/usr/local/bin/magento2:ro
-      - ./etc/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./etc/php/tools:/usr/local/bin/magento2
+      - ./etc/php/php.ini:/usr/local/etc/php/php.ini
       - ./etc/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ./etc/php/php-fpm.conf:/usr/local/etc/php-fpm.conf
     environment:
