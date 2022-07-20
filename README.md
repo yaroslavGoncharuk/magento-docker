@@ -63,6 +63,10 @@
 
 * RUN `mutagen project run di-compile` to execute di compile command
 
+#### Tests preparation
+
+* RUN `mutagen project run tests-setup` to execute test preparation command
+
 #### Enable/disable Xdebug 
 
 * Enable: `mutagen project run xdebug-enable`

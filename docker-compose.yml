@@ -68,7 +68,6 @@ services:
     environment:
       #COMPOSER_HOME: /var/www/.composer
       PHP_IDE_CONFIG: serverName=magento.test
-    command: sh -c 'service ssh start; php-fpm -R'
   elastic:
     image: elasticsearch:7.17.5
     hostname: elastic
