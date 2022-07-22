@@ -1,17 +1,11 @@
 version: '3.7'
 services:
-  mutagen:
-    build: ./build/mutagen
-    init: true
-    container_name: web-mutagen
-    volumes:
-      - code:/var/www
   # https://devdocs.magento.com/guides/v2.4/install-gde/system-requirements.html
   web:
     image: nginx:1.21.6
     hostname: web
+    container_name: web
     volumes:
-      - code:/var/www
       - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./etc/nginx/server.crt:/etc/nginx/server.crt
       - ./etc/nginx/server.key:/etc/nginx/server.key
@@ -31,6 +25,7 @@ services:
         reservations:
           memory: 4096M
     hostname: db
+    container_name: db
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "magento"
@@ -40,12 +35,13 @@ services:
       - "${DB_PORT}:3306"
     command: --default-authentication-plugin=mysql_native_password
   app:
-    image: slopukhov/php:8.1.8-fpm-buster
+    image: slopukhov/php:8.1.8-fpm
     # to re-build image use the following docker file:
     # build:
     #   context: .
     #   dockerfile: build/php/fpm
     hostname: app
+    container_name: app
     depends_on:
       - db
       - elastic
@@ -68,6 +64,7 @@ services:
   elastic:
     image: elasticsearch:7.17.5
     hostname: elastic
+    container_name: elastic
     ports:
       - "${ELASTIC_PORT}:9200"
     environment:
@@ -82,11 +79,13 @@ services:
   redis:
     image: redis:6.2.7
     hostname: redis
+    container_name: redis
     ports:
       - "${REDIS_PORT}:6379"
   rabbit:
     image: rabbitmq:3.9.21
     hostname: rabbitmq
+    container_name: rabbitmq
     ports:
       - "${RABBIT_PORT}:5672"
 networks:
