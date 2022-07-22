@@ -6,6 +6,7 @@ services:
     hostname: web
     container_name: web
     volumes:
+      - code:/var/www
       - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./etc/nginx/server.crt:/etc/nginx/server.crt
       - ./etc/nginx/server.key:/etc/nginx/server.key
