@@ -1,6 +1,6 @@
 # magento-docker
 
-`magento-docker` is Docker environment for easy to set up, configure, debug Magento2 with Live Search instance.
+`magento-docker` is Docker environment for easy to set up, configure, debug Magento 2.
 
 ### Requirements
 
@@ -10,7 +10,7 @@
 * Setup SSH-keys on your github account. (see [docs](https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)  for [help](https://help.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account))
 
 * (optional - for Mutagen installation only) Install Mutagen [docs](https://mutagen.io/documentation/introduction/installation)
-* Ensure you do not have `dnsmasq` installed/enabled locally (will be auto-installed if you've use Valet+ to install Magento)
+* Ensure you do not have `dnsmasq` installed/enabled locally (will be auto-installed if you've use Valet+ to install Magento 2)
 
 
 ### How to install
@@ -37,7 +37,7 @@
 
 ### Project start
 
-* RUN `mutagen project start` to start project (repositories clone, linking, configuration)
+* RUN `mutagen project start` to start project (Magento 2 install, Magento 2 configuration apply)
 
 #### Generate performance profile
 
