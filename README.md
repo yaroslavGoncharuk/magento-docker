@@ -12,7 +12,6 @@
 * Install Mutagen [docs](https://mutagen.io/documentation/introduction/installation)
 * Ensure you do not have `dnsmasq` installed/enabled locally (will be auto-installed if you've use Valet+ to install Magento 2)
 
-
 ### How to install
 
 #### Steps
