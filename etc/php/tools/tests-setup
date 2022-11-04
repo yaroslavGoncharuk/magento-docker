@@ -11,6 +11,9 @@ echo "Prepare Api-Functional Tests"
 php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("DROP DATABASE IF EXISTS magento_functional_tests;");'
 php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("CREATE DATABASE magento_functional_tests;");'
 cp /usr/local/bin/magento2/tests/api-functional/install-config-mysql.php /var/www/magento2ce/dev/tests/api-functional/config
+sed -i 's/magento.url/magento.test/' /var/www/magento2ce/dev/tests/api-functional/phpunit_graphql.xml.dist
+sed -i 's/magento.url/magento.test/' /var/www/magento2ce/dev/tests/api-functional/phpunit_rest.xml.dist
+sed -i 's/magento.url/magento.test/' /var/www/magento2ce/dev/tests/api-functional/phpunit_soap.xml.dist
 
 #acceptance
 echo "Prepare Acceptance Tests"
