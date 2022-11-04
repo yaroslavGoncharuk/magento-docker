@@ -83,9 +83,18 @@
 
 * RUN `docker-compose exec app bash` to connect to docker container
 * RUN `cd magento2ce` to go to the root directory of the project
+
+MFTF
 * RUN `vendor/bin/mftf run:test MftfTestName` to run MFTF test. Instead of MftfTestName - specify the real name of the test
+
+PHP Unit
 * RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/unit/phpunit.xml.dist app/code/PhpUnitTestPath` to run PHP Unit test. Instead of PhpUnitTestPath - specify the real PHP Unit test path of the test
+
+PHP Integration
+* RUN `rm -rf generated/code && rm -rf generated/metadata` in case of errors in Magento installation before running the integration test
 * RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/integration/phpunit.xml.dist dev/tests/integration/testsuite/PhpIntegrationTestPath` to run PHP Integration test. Instead of PhpIntegrationTestPath - specify the real PHP integration test path of the test
+
+Api Functional
 * RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/api-functional/phpunit_rest.xml.dist dev/tests/api-functional/testsuite/ApiFunctionalTestPath` to run Api Functional test. Instead of ApiFunctionalTestPath - specify the real Api Functional test path of the test
 
 #### Enable/disable Xdebug 
