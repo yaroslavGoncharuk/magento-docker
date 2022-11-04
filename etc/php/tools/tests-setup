@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 #integration
+#known issues: https://github.com/magento/magento2/issues/33802
 echo "Prepare Integration Tests"
 php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("DROP DATABASE IF EXISTS magento_integration_tests;");'
 php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("CREATE DATABASE magento_integration_tests;");'
