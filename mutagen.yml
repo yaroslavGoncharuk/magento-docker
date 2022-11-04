@@ -24,14 +24,16 @@ beforeTerminate:
 
 # Define common utility commands.
 commands:
-  logs: docker-compose logs --follow
-  reindex: docker-compose exec app magento reindex
-  upgrade: docker-compose exec app magento upgrade
-  cache-flush: docker-compose exec app magento cache-flush
-  cron: docker-compose exec app magento cron
   profile-generate: docker-compose exec app magento profile-generate
+  cron: docker-compose exec app magento cron
+  reindex: docker-compose exec app magento reindex
+  cache-flush: docker-compose exec app magento cache-flush
+  upgrade: docker-compose exec app magento upgrade
+  di-compile: docker-compose exec app magento di-compile
+  tests-setup: docker-compose exec app magento tests-setup
   xdebug-enable: docker-compose exec app magento xdebug-enable && docker-compose restart app web
   xdebug-disable: docker-compose exec app magento xdebug-disable && docker-compose restart app web
+  logs: docker-compose logs --follow
 
 # Synchronize code to the shared Docker volume via the Mutagen service.
 sync:
