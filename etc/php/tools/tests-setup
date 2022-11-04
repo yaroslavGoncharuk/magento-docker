@@ -22,3 +22,5 @@ cp /usr/local/bin/magento2/tests/acceptance/.credentials /var/www/magento2ce/dev
 bin/magento config:set cms/wysiwyg/enabled disabled
 bin/magento config:set admin/security/use_form_key 0
 vendor/bin/mftf build:project
+
+bin/magento cache:flush
