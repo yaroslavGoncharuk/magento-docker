@@ -30,13 +30,6 @@ bin/magento setup:upgrade
 bin/magento setup:di:compile
 bin/magento cache:flush
 
-# apply Magento configs
-bin/magento config:set web/secure/base_url https://magento.test/
-
-bin/magento indexer:set-mode schedule
-bin/magento indexer:reindex
-bin/magento cache:flush
-
 echo "Magento 2 Successfully installed!"
 echo "To open it navigate to https://magento.test/"
 
