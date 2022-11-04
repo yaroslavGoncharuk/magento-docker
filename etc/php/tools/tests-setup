@@ -4,6 +4,7 @@
 echo "Prepare Integration Tests"
 php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("DROP DATABASE IF EXISTS magento_integration_tests;");'
 php -r '(new PDO("mysql:host=db;dbname=magento", "root"))->exec("CREATE DATABASE magento_integration_tests;");'
+cp /usr/local/bin/magento2/tests/integration/install-config-mysql.php /var/www/magento2ce/dev/tests/integration/etc
 
 #acceptance
 echo "Prepare Acceptance Tests"

@@ -66,6 +66,14 @@
 
 * RUN `mutagen project run tests-setup` to execute test preparation command
 
+#### Tests execution
+
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `vendor/bin/mftf run:test MftfTestName` to run MFTF test. instead of MftfTestName - specify the real name of the test
+* RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/unit/phpunit.xml.dist app/code/PhpUnitTestPath` to run PHP Unit test. Instead of PhpUnitTestPath - specify the real PHP Unit test path of the test
+* RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/integration/phpunit.xml.dist dev/tests/integration/testsuite/PhpIntegrationTestPath` to run PHP Integration test. Instead of PhpIntegrationTestPath - specify the real PHP integration test path of the test
+
 #### Enable/disable Xdebug 
 
 * Enable: `mutagen project run xdebug-enable`
