@@ -40,37 +40,48 @@
 
 #### Generate performance profile
 
-* RUN `mutagen project run profile-generate` to generate performance profile
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `bin/magento setup:performance:generate-fixtures -s setup/performance-toolkit/profiles/PROFILE_EDITION/PROFILE_SIZE.xml` to generate performance profile. . Instead of PROFILE_EDITION and PROFILE_SIZE - specify your Magento edition and required profile size
+* RUN `bin/magento indexer:reindex` to execute reindex command
 
 #### Cron run
 
-* RUN `mutagen project run cron` to execute cron command
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `bin/magento cron:run` to execute cron command
 
 #### Reindex run
 
-* RUN `mutagen project run reindex` to execute reindex command
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `bin/magento indexer:reindex` to execute reindex command
 
 #### Cache flush
 
-* RUN `mutagen project run cache-flush` to execute cache flush command
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `bin/magento cache:flush` to execute cache flush command
 
 #### Upgrade run
 
-* RUN `mutagen project run upgrade` to execute upgrade command
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `bin/magento setup:upgrade` to execute upgrade command
+* RUN `bin/magento cache:flush` to execute cache flush command
 
 #### DI compile
 
-* RUN `mutagen project run di-compile` to execute di compile command
-
-#### Tests preparation
-
-* RUN `mutagen project run tests-setup` to execute test preparation command
+* RUN `docker-compose exec app bash` to connect to docker container
+* RUN `cd magento2ce` to go to the root directory of the project
+* RUN `bin/magento setup:di:compile` to execute di compile command
+* RUN `bin/magento cache:flush` to execute cache flush command
 
 #### Tests execution
 
 * RUN `docker-compose exec app bash` to connect to docker container
 * RUN `cd magento2ce` to go to the root directory of the project
-* RUN `vendor/bin/mftf run:test MftfTestName` to run MFTF test. instead of MftfTestName - specify the real name of the test
+* RUN `vendor/bin/mftf run:test MftfTestName` to run MFTF test. Instead of MftfTestName - specify the real name of the test
 * RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/unit/phpunit.xml.dist app/code/PhpUnitTestPath` to run PHP Unit test. Instead of PhpUnitTestPath - specify the real PHP Unit test path of the test
 * RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/integration/phpunit.xml.dist dev/tests/integration/testsuite/PhpIntegrationTestPath` to run PHP Integration test. Instead of PhpIntegrationTestPath - specify the real PHP integration test path of the test
 * RUN `vendor/phpunit/phpunit/phpunit --configuration /var/www/magento2ce/dev/tests/api-functional/phpunit_rest.xml.dist dev/tests/api-functional/testsuite/ApiFunctionalTestPath` to run Api Functional test. Instead of ApiFunctionalTestPath - specify the real Api Functional test path of the test
