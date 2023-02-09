@@ -111,6 +111,14 @@ Api Functional
 
 Sent emails will be saved in folder `~/www/magento2ce/var/tmp/mails/` as .htm files
 
+### Project flushing sessions (to flush the synchronization sessions associated with a project)
+
+* RUN `mutagen project flush`
+
+### Project resetting sessions (to reset the synchronization sessions associated with a project)
+
+* RUN `mutagen project reset`
+
 ### Project termination (removes all containers and volumes)
 
 * RUN `mutagen project terminate`
